@@ -149,6 +149,7 @@ func (h HttpSigTransport) Deliver(c context.Context, b []byte, to *url.URL) erro
 	req.Header.Add("Accept-Charset", "utf-8")
 	req.Header.Add("Date", h.clock.Now().UTC().Format("Mon, 02 Jan 2006 15:04:05")+" GMT")
 	req.Header.Add("User-Agent", fmt.Sprintf("%s %s", h.appAgent, h.gofedAgent))
+	req.Header.Add("Host", to.Host)
 	h.postSignerMu.Lock()
 	err = h.postSigner.SignRequest(h.privKey, h.pubKeyId, req, b)
 	h.postSignerMu.Unlock()
