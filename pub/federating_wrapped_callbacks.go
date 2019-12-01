@@ -580,8 +580,8 @@ func (w FederatingWrappedCallbacks) accept(c context.Context, a vocab.ActivitySt
 				}
 				// Ensure that we are one of the actors on the Follow.
 				ok = false
-				actors := follow.GetActivityStreamsActor()
-				for iter := actors.Begin(); iter != actors.End(); iter = iter.Next() {
+				actorsInner := follow.GetActivityStreamsActor()
+				for iter := actorsInner.Begin(); iter != actorsInner.End(); iter = iter.Next() {
 					id, err := ToId(iter)
 					if err != nil {
 						return err
